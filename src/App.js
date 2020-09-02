@@ -5,25 +5,13 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      n: 0
+      array:[1,2,4,5]
     }
-  }
-
-  onClick = () => {
-    this.setState((state) => (
-      {
-        n: state.n + 1
-
-      }
-    ))
   }
 
   render() {
     return (
-      <>
-        {this.state.n % 2 ? <div>偶数</div> : <div>奇数</div>}
-        <button onClick={this.onClick}>+1</button>
-      </>
+      this.state.array.map(item=><div key={item}>{item} </div>)
     )
   }
 }
