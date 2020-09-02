@@ -1,28 +1,17 @@
 import React from "react"
 
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.divRef = React.createRef()
-    this.state = {
-      width: undefined
-    }
+const App =(props)=>{
+  const [n,setN] = React.useState(0)
+  const onClick = ()=>{
+    setN(n+1)
   }
+  return (
+    <div>{n}
+    <button onClick={onClick}>+1</button>
+    </div>
+  )
 
-  componentDidMount() {
-    const div = this.divRef.current
-    console.log(div)
-    const {width} = div.getBoundingClientRect()
-    this.setState({width})
-    console.log('render了')
-  }
-
-  render() {
-    return (
-      <div ref={this.divRef}><p>Hello World,{this.state.width}</p></div>
-    )
-  }
 }
 
 export default App
