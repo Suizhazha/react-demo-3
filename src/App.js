@@ -4,14 +4,23 @@ import React from "react"
 class App extends React.PureComponent {
   constructor(props) {
     super(props)
+    this.divRef = React.createRef()
     this.state = {
-      array:[1,2,4,5]
+      width: undefined
     }
+  }
+
+  componentDidMount() {
+    const div = this.divRef.current
+    console.log(div)
+    const {width} = div.getBoundingClientRect()
+    this.setState({width})
+    console.log('render了')
   }
 
   render() {
     return (
-      this.state.array.map(item=><div key={item}>{item} </div>)
+      <div ref={this.divRef}><p>Hello World,{this.state.width}</p></div>
     )
   }
 }
