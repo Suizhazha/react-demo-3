@@ -2,34 +2,28 @@ import React, {useEffect} from "react"
 
 
 const App = (props) => {
-  const [childVisible,serChildVisible] = React.useState(true)
-const show = ()=>{
-    serChildVisible(true)
-}
-const hide = ()=>{
-    serChildVisible(false)
-}
+  const [n, setN] = React.useState(0)
+  const onClick = () => {
+    setN(n + 1)
+  }
+
+  const [nUpdateCount, setNUpdateCount] = React.useState(0)
+
+  useEffect(() => {
+    setNUpdateCount(n=>n+1)
+  }, [n])
+
+  useEffect(() => {
+    if (nUpdateCount>1){
+      console.log("n变了")
+    }
+  }, [nUpdateCount])
+
   return (
     <div>
-      {childVisible ?
-        <button onClick={hide}> hide </button>
-      :
-        <button onClick={show}> show </button>
-      }
-      {childVisible ? <Child/> : null}
+      {n}
+      <button onClick={onClick}>+1</button>
     </div>
-  )
-}
-
-const Child = (props) => {
-  useEffect( ()=>{
-    return ()=>{
-      console.log('child要销毁了')
-    }
-  })
-
-  return (
-    <div>Child</div>
   )
 }
 
